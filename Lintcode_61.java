@@ -47,17 +47,12 @@ public class Lintcode_61 {
                 start = mid;
             }
         }
-        if(A[end] == target){
+        if (A[end] == target){
             result[1] = end;
         }
-        else if (A[start] == target){
+        else {
             result[1] = start;
         }
-        else{
-            result[0] = result[1] = -1;
-            return result;
-        }
-        
         return result;
     }
 }
