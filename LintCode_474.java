@@ -1,4 +1,5 @@
-public class LintCode_474 {
+public class LintCode_474
+{
     /**
      * @param root: The root of the tree
      * @param A, B: Two node in the tree
@@ -25,9 +26,8 @@ public class LintCode_474 {
     
     private ArrayList<ParentTreeNode> getPath(ParentTreeNode node){
         ArrayList<ParentTreeNode> path = new ArrayList<ParentTreeNode>();
-        path.add(node);
-        while(node.parent != null){
-            path.add(node.parent);
+        while(node!= null){
+            path.add(node);
             node = node.parent;
         }
         return path;
