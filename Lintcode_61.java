@@ -10,7 +10,6 @@ public class Lintcode_61 {
         if (A == null || A.length == 0){
             return new int[]{-1, -1};
         }
-        
         int[] result = new int[2];
         int start = 0; 
         int end = A.length - 1;
@@ -34,7 +33,6 @@ public class Lintcode_61 {
            result[0] = result[1] = -1;
            return result;
         }
-        
         //need to reassign start and end
         start = 0;
         end = A.length -1;
