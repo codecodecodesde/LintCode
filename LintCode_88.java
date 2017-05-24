@@ -9,7 +9,6 @@ public class LintCode_88 {
         if(root == null || root == A || root == B){
             return root;
         }
-        
         TreeNode left = lowestCommonAncestor(root.left, A ,B);
         TreeNode right = lowestCommonAncestor(root.right, A ,B);
         
@@ -24,7 +23,6 @@ public class LintCode_88 {
         if(right != null){
             return right;
         }
-        
         return null;
     }
 }
