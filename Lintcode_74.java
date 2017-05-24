@@ -25,7 +25,6 @@ class LintCode_74 {
                 start = mid;
             }
         }
-        
         if ( SVNRepo.isBadVersion(start)){
             return start;
         }
