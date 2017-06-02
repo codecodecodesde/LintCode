@@ -34,52 +34,52 @@ public class LintCode_71 {
 }
 
 public class LintCode_71_2 {
+    /**
+     * @param root: The root of binary tree.
+     * @return: A list of lists of integer include 
+     *          the zigzag level order traversal of its nodes' values 
+     */
     public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-
-        if (root == null) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(root == null){
             return result;
         }
-
-        Stack<TreeNode> currLevel = new Stack<TreeNode>();
-        Stack<TreeNode> nextLevel = new Stack<TreeNode>();
+        Stack<TreeNode> current = new Stack<>();
+        Stack<TreeNode> next = new Stack<>();
         Stack<TreeNode> tmp;
+        current.push(root);
         
-        currLevel.push(root);
-        boolean normalOrder = true;
-
-        while (!currLevel.isEmpty()) {
-            ArrayList<Integer> currLevelResult = new ArrayList<Integer>();
-
-            while (!currLevel.isEmpty()) {
-                TreeNode node = currLevel.pop();
-                currLevelResult.add(node.val);
-
-                if (normalOrder) {
-                    if (node.left != null) {
-                        nextLevel.push(node.left);
+        boolean startLeft = true;
+        while(!current.isEmpty()){
+            int size = current.size();
+            ArrayList<Integer> level = new ArrayList<>();
+            for(int i = 0; i < size; i++){
+                TreeNode head = current.pop();
+                level.add(head.val);
+                if(!startLeft){
+                   if(head.right != null){
+                        next.push(head.right);
+                   }
+                    if(head.left != null){
+                        next.push(head.left);
                     }
-                    if (node.right != null) {
-                        nextLevel.push(node.right);
+                }
+                else{
+                    if(head.left != null){
+                        next.push(head.left);
                     }
-                } else {
-                    if (node.right != null) {
-                        nextLevel.push(node.right);
-                    }
-                    if (node.left != null) {
-                        nextLevel.push(node.left);
+                    if(head.right != null){
+                        next.push(head.right);
                     }
                 }
             }
-
-            result.add(currLevelResult);
-            tmp = currLevel;
-            currLevel = nextLevel;
-            nextLevel = tmp;
-            normalOrder = !normalOrder;
+            startLeft = !startLeft;
+            result.add(level);
+            tmp = current;
+            current = next;
+            next = tmp;
         }
-
         return result;
-
     }
 }
