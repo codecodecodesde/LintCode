@@ -53,8 +53,8 @@ public class LintCode_242_2{
         
         while(!queue.isEmpty()){
             int size = queue.size();
-            ListNode pivot = new ListNode(0);
-            ListNode node = pivot;
+            ListNode sentinel = new ListNode(0);
+            ListNode node = sentinel;
             for(int i = 0; i < size; i++){
                 TreeNode head = queue.poll();
                 node.next = new ListNode(head.val);
@@ -66,7 +66,7 @@ public class LintCode_242_2{
                     queue.offer(head.right);
                 }
             }
-            result.add(pivot.next);
+            result.add(sentinel.next);
         }
         return result;
     }
