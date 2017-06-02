@@ -36,3 +36,38 @@ public class LintCode_242 {
         return result;
     }
 }
+
+public class LintCode_242_2{
+    /**
+     * @param root the root of binary tree
+     * @return a lists of linked list
+     */
+    public List<ListNode> binaryTreeToLists(TreeNode root) {
+        // Write your code here
+        List<ListNode> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            ListNode pivot = new ListNode(0);
+            ListNode node = pivot;
+            for(int i = 0; i < size; i++){
+                TreeNode head = queue.poll();
+                node.next = new ListNode(head.val);
+                node = node.next;
+                if(head.left != null){
+                    queue.offer(head.left);
+                }
+                if(head.right != null){
+                    queue.offer(head.right);
+                }
+            }
+            result.add(pivot.next);
+        }
+        return result;
+    }
+}
