@@ -32,7 +32,7 @@ public class LintCode_70 {
     }
 }
 
-public class LintCode_7_2 {
+public class LintCode_70_2 {
     /**
      * @param root: The root of binary tree.
      * @return: buttom-up level order a list of lists of integer
