@@ -18,7 +18,6 @@ public class LintCode_431 {
             return result;
         }
         
-        Queue<UndirectedGraphNode> queue = new LinkedList<>();
         Set<UndirectedGraphNode> set = new HashSet<>();
         
         for(UndirectedGraphNode node : nodes){
