@@ -28,11 +28,11 @@ public class LintCode_611 {
                 Point next = queue.poll();
                 for(int j = 0; j < 8; j++){
                     Point neighbor = new Point(next.x + directionX[j], next.y + directionY[j]);
-                    if(neighbor.x == destination.x && neighbor.y == destination.y){
-                        return count;
-                    }
                     if(!Go(grid, neighbor)){
                         continue;
+                    }
+                    if(neighbor.x == destination.x && neighbor.y == destination.y){
+                        return count;
                     }
                     queue.offer(neighbor);
                     grid[neighbor.x][neighbor.y] = true;
