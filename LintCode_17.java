@@ -22,9 +22,8 @@ class LintCode_17 {
     }
     
     private void dfs(int[] nums, ArrayList<ArrayList<Integer>> result, ArrayList<Integer> subset, int startIndex){
-        
         result.add(new ArrayList<Integer>(subset));
-        
+
         for(int i = startIndex; i < nums.length; i++){
             subset.add(nums[i]);
             dfs(nums, result, subset, i + 1);
