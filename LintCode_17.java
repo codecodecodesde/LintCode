@@ -9,7 +9,6 @@ class LintCode_17 {
         if(nums == null){
             return result;
         }
-        
         if(nums.length == 0){
             result.add(new ArrayList<Integer>());
             return result;
