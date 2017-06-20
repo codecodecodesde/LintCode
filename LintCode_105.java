@@ -46,7 +46,7 @@ public class LintCode_105_2 {
     public RandomListNode copyRandomList(RandomListNode head) {
         // write your code here
         RandomListNode newHead = extendRandomList(head);
-        newHead = addRandomPointer(newHead);
+        addRandomPointer(newHead);
         newHead = shortRandomList(newHead);
         return newHead;
         
@@ -55,27 +55,21 @@ public class LintCode_105_2 {
         RandomListNode cur = head;
         while(cur != null){
             RandomListNode newNode = new RandomListNode(cur.label);
-            RandomListNode curNext = cur.next;
+            newNode.next = cur.next;
             cur.next = newNode;
-            newNode.next = curNext;
             cur = cur.next.next;
         }
         return head;
     }
     
-    private RandomListNode addRandomPointer(RandomListNode head){
+    private void addRandomPointer(RandomListNode head){
         RandomListNode cur = head;
         while(cur != null && cur.next != null){
             if(cur.random != null){
                 cur.next.random = cur.random.next;
             }
-            else{
-                cur.next.random = null;
-            }
             cur = cur.next.next;        
         }
-        
-        return head;
     }
     
     private RandomListNode shortRandomList(RandomListNode head){
