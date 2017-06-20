@@ -55,3 +55,44 @@ public class LintCode_135 {
         return nums;
     }
 }
+
+public class LintCode_135_2 {
+    /**
+     * @param candidates: A list of integers
+     * @param target:An integer
+     * @return: A list of lists of integers
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // write your code here
+        List<List<Integer>> result = new ArrayList<>();
+        if(candidates == null){
+            return result;
+        }
+        if(candidates.length == 0){
+            result.add(new ArrayList<Integer>());
+            return result;
+        }
+        Arrays.sort(candidates);
+        List<Integer> combination = new ArrayList<>();
+        dfs(candidates, result, 0, combination, 0, target);
+        return result;
+    }
+    
+    private void dfs (int[] candidates, List<List<Integer>> result,int startIndex, List<Integer> combination, int sum, int target){
+        if(sum == target){
+            result.add(new ArrayList<Integer>(combination));
+        } 
+        
+        for(int i = startIndex; i < candidates.length; i++){
+            if(sum > target){
+                break;
+            }
+            if(i > startIndex && candidates[i] == candidates[i - 1]){
+                continue;
+            }
+            combination.add(candidates[i]);
+            dfs(candidates, result, i, combination, sum + candidates[i], target);
+            combination.remove(combination.size() - 1);
+        }
+    }
+}
