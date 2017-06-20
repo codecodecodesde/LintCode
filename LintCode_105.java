@@ -29,3 +29,62 @@ public class LintCode_105{
         return map.get(head);
     }
 }
+
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class LintCode_105_2 {
+    /**
+     * @param head: The head of linked list with a random pointer.
+     * @return: A new head of a deep copy of the list.
+     */
+    public RandomListNode copyRandomList(RandomListNode head) {
+        // write your code here
+        RandomListNode newHead = extendRandomList(head);
+        newHead = addRandomPointer(newHead);
+        newHead = shortRandomList(newHead);
+        return newHead;
+        
+    }
+    private RandomListNode extendRandomList(RandomListNode head){
+        RandomListNode cur = head;
+        while(cur != null){
+            RandomListNode newNode = new RandomListNode(cur.label);
+            RandomListNode curNext = cur.next;
+            cur.next = newNode;
+            newNode.next = curNext;
+            cur = cur.next.next;
+        }
+        return head;
+    }
+    
+    private RandomListNode addRandomPointer(RandomListNode head){
+        RandomListNode cur = head;
+        while(cur != null && cur.next != null){
+            if(cur.random != null){
+                cur.next.random = cur.random.next;
+            }
+            else{
+                cur.next.random = null;
+            }
+            cur = cur.next.next;        
+        }
+        
+        return head;
+    }
+    
+    private RandomListNode shortRandomList(RandomListNode head){
+        RandomListNode cur = head;
+        while(cur != null && cur.next != null && cur.next.next != null){
+            RandomListNode curCopyNext = cur.next.next;
+            cur.next.next = cur.next.next.next;
+            cur = curCopyNext;
+        }
+        return head.next;
+    }
+}
