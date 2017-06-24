@@ -31,12 +31,7 @@ public class LintCode_599 {
             if((next.val < cur.val) && (x < next.val || x > cur.val)){
                 break;
             }
-            // if(x >= next.val && x <= cur.val){
-            //     break;
-            // }
-            // if((next.val > cur.val) && (x > next.val || x < cur.val)){
-            //     break;
-            // }
+
             cur = next;
             next = next.next;
         }
