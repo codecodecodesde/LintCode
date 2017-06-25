@@ -43,70 +43,56 @@ public class LintCode_136 {
     }
 }
 
-public class Solution {
-    List<List<String>> results;
-    boolean[][] isPalindrome;
-    
+public class LintCode_136_2 {
     /**
      * @param s: A string
      * @return: A list of lists of string
      */
+    boolean[][] isPalindrome;
     public List<List<String>> partition(String s) {
-        results = new ArrayList<>();
-        if (s == null || s.length() == 0) {
-            return results;
+        // write your code here
+        List<List<String>> result = new ArrayList<>();
+        if(s == null || s.length() == 0){
+            return result;
         }
         
-        getIsPalindrome(s);
-        
-        helper(s, 0, new ArrayList<Integer>());
-        
-        return results;
+        isPalindrome = getPalindrome(s);
+        List<String> partition = new ArrayList<>();
+        dfs(s, result, 0, partition);
+        return result;
     }
-    
-    private void getIsPalindrome(String s) {
-        int n = s.length();
-        isPalindrome = new boolean[n][n];
-        
-        for (int i = 0; i < n; i++) {
+    private boolean[][] getPalindrome(String s){
+        isPalindrome = new boolean[s.length()][s.length()];
+        for(int i = 0; i < s.length(); i++){
             isPalindrome[i][i] = true;
         }
-        for (int i = 0; i < n - 1; i++) {
+        
+        for(int i = 0; i < s.length() - 1; i++){
             isPalindrome[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
         }
         
-        for (int i = n - 3; i >= 0; i--) {
-            for (int j = i + 2; j < n; j++) {
+        for(int i = s.length() - 3; i >= 0; i--) {
+            for (int j = i + 2; j < s.length(); j++) {
                 isPalindrome[i][j] = isPalindrome[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
             }
         }
+        return isPalindrome;
+        
     }
-    
-    private void helper(String s,
-                        int startIndex,
-                        List<Integer> partition) {
-        if (startIndex == s.length()) {
-            addResult(s, partition);
+    private void dfs(String s, List<List<String>> result, int startIndex, List<String> partition) {
+        if(startIndex == s.length()){
+            result.add(new ArrayList<String>(partition));
             return;
         }
         
-        for (int i = startIndex; i < s.length(); i++) {
-            if (!isPalindrome[startIndex][i]) {
+        for(int i = startIndex; i < s.length(); i++){
+            if(!isPalindrome[startIndex][i]){
                 continue;
             }
-            partition.add(i);
-            helper(s, i + 1, partition);
+            partition.add(s.substring(startIndex, i + 1));
+            dfs(s, result, i + 1, partition);
             partition.remove(partition.size() - 1);
         }
-    }
-    
-    private void addResult(String s, List<Integer> partition) {
-        List<String> result = new ArrayList<>();
-        int startIndex = 0;
-        for (int i = 0; i < partition.size(); i++) {
-            result.add(s.substring(startIndex, partition.get(i) + 1));
-            startIndex = partition.get(i) + 1;
-        }
-        results.add(result);
+        
     }
 }
