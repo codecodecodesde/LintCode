@@ -21,4 +21,5 @@ public class LintCode_56 {
         }
         return result;
     }
+    
 }
