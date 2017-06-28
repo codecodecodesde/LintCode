@@ -11,22 +11,22 @@ public class LintCode_31 {
 	    }
 	    
 	    int left = 0, right = nums.length - 1;
-	    while(left < right){
-	        while(left < right && nums[left] < k){
+	    while(left <= right){
+	        while(left <= right && nums[left] < k){
 	            left++;
 	        }
-	        while(left < right && nums[right] >= k){
-	            right --;
+	        while(left <= right && nums[right] >= k){
+	            right--;
 	        }
 	        
-	        int tmp = nums[left];
-	        nums[left] = nums[right];
-	        nums[right] = tmp;
+	        if(left <= right){
+	            int tmp = nums[left];
+	            nums[left] = nums[right];
+	            nums[right] = tmp;
+	            left++;
+	            right--;
+	        }
 	    }
-	    
-	    if(nums[left] < k){
-	        return left + 1;
-	    }
-	    return right;
+	    return left;
     }
 }
