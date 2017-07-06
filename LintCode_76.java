@@ -1,41 +1,32 @@
-/**
- * Definition for ListNode.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int val) {
- *         this.val = val;
- *         this.next = null;
- *     }
- * }
- */ 
-public class LintCode_96 {
+public class LintCode_76 {
     /**
-     * @param head: The first node of linked list.
-     * @param x: an integer
-     * @return: a ListNode 
+     * @param nums: The integer array
+     * @return: The length of LIS (longest increasing subsequence)
      */
-    public ListNode partition(ListNode head, int x) {
+    public int longestIncreasingSubsequence(int[] nums) {
         // write your code here
-        if(head == null){
-            return null;
+        if(nums == null || nums.length == 0){
+            return 0;
         }
-        ListNode smallDummy = new ListNode(0);
-        ListNode bigDummy = new ListNode(0);
-        ListNode small = smallDummy, big = bigDummy;
-        while(head != null){
-            if(head.val < x){
-                small.next = head;
-                small = head;
-            }
-            else{
-                big.next = head;
-                big = head;
-            }
-            head = head.next;
+        
+        int[] f = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            f[i] = 1;
         }
-        small.next = bigDummy.next;
-        big.next = null;
-        return smallDummy.next;
+        
+        for(int i = 1; i < nums.length; i++){
+            for(int j = 0; j < i; j++){
+                if(nums[j] < nums[i]){
+                    f[i] = Math.max(f[j] + 1, f[i]);
+                }
+            }
+        }
+        
+        int max = 1;
+        for(int i = 0; i < nums.length; i++){
+            max = Math.max(max, f[i]);
+        }
+        
+        return max;
     }
 }
