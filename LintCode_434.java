@@ -48,7 +48,7 @@ public class Solution {
      * @return an integer array
      */
     public List<Integer> numIslands2(int n, int m, Point[] operators) {
-        // Write your code here
+
         List<Integer> result = new ArrayList<>();
         if(operators == null || operators.length == 0){
             return result;
