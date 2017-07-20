@@ -81,3 +81,81 @@ public class Trie {
         return p;
     }
 }
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie trie = new Trie();
+ * trie.insert("lintcode");
+ * trie.search("lint"); will return false
+ * trie.startsWith("lint"); will return true
+ */
+class TrieNode {
+    // Initialize your data structure here.
+    public TrieNode[] children;
+    public boolean hasWord;
+    public TrieNode() {
+        children = new TrieNode[26];
+    }
+}
+
+public class Trie {
+    private TrieNode root;
+
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    public void insert(String word) {
+        TrieNode p = root;
+        char[] chars = word.toCharArray();
+        for(int i = 0; i < chars.length; i++){
+            char c = chars[i];
+            if(p.children[c - 'a'] != null){
+                p = p.children[c - 'a'];
+            }else{
+                TrieNode newNode = new TrieNode();
+                p.children[c - 'a'] = newNode;
+                p = newNode;
+            }
+            if(i == chars.length - 1){
+                p.hasWord = true;
+            }
+        }
+    }
+
+    // Returns if the word is in the trie.
+    public boolean search(String word) {
+        TrieNode last = findTrieNodePos(word);
+        if(last == null){
+            return false;
+        }else{
+            if(last.hasWord){
+                return true;
+            }
+            return false;
+        }
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    public boolean startsWith(String prefix) {
+        if(findTrieNodePos(prefix) == null){
+            return false;
+        }
+        return true;
+    }
+    
+    public TrieNode findTrieNodePos(String word){
+        TrieNode p = root;
+        char[] chars = word.toCharArray();
+        for(int i = 0; i < chars.length; i++){
+            char c = chars[i];
+            if(p.children[c - 'a'] == null){
+                return null;
+            }
+            p = p.children[c - 'a'];
+        }
+        return p;
+    }
+}
