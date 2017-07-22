@@ -29,20 +29,6 @@ class Trie{
             }
         }
     }
-
-    public boolean find(String word){
-        TrieNode p = root;
-        char[] chars = word.toCharArray();
-        for(int i = 0; i < chars.length; i++){
-            char c = chars[i];
-            if(p.children[c - 'a'] != null){
-                p = p.children[c- 'a'];
-            }else{
-                return false;
-            }
-        }
-        return p.hasWord;
-    }
 }
 
 public class Solution {
@@ -94,6 +80,7 @@ public class Solution {
             if(next_x < 0 || next_x >= row || next_y < 0 || next_y >= col){
                 continue;
             }
+
             board[index_x][index_y] = '#';
             dfs(board, next_x, next_y, p.children[c - 'a'], result);
             board[index_x][index_y] = c;
