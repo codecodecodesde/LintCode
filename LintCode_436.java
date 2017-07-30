@@ -69,6 +69,7 @@ public class Solution {
                 maxSquare = Math.max(maxSquare, f[i%2][j]);
             }
         }
+        
         return maxSquare * maxSquare;
     }
 }
